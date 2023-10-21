@@ -1,0 +1,20 @@
+.bg-image {
+  background: linear-gradient(rgba(39, 137, 199, 0.8), rgba(248, 247, 248, 0.5)),
+    url("../../assets/images/travel-agency.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.signature-text {
+  font-style: italic;
+  font-family: "Pacifico", cursive;
+  font-size: 46px;
+  margin: 0; /* Elimina los márgenes por defecto para que se alinee correctamente */
+  background: linear-gradient(
+    to right,
+    #ff6666,
+    #ff99cc
+  ); /* Fondo degradado de rojizo a rosado */
+  -webkit-background-clip: text; /* Hace que el degradado se aplique al texto */
+  color: transparent; /* Hace que el texto sea transparente para mostrar el degradado de fondo */
+}
