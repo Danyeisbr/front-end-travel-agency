@@ -33,13 +33,13 @@ export const RoomDetail: React.FC<RoomDetailProps> = ({
 
   const history = useHistory();
   const handleBookRoomClick = () => {
-    localStorage.setItem("selectedRoom", JSON.stringify({ _id, roomNumber }));
+    localStorage.setItem("selectedRoom", JSON.stringify({ _id, roomNumber, roomBasePrice, roomTax }));
     history.push("/reservations");
   };
 
   return (
     <div className="col-lg-12 mb-4">
-      <div className="card shadow d-flex flex-row">
+      <div className="card custom-card border border-0 d-flex flex-row">
         <div className="col-md-4 image-container">
           <img
             src={roomImgUrl}
@@ -88,16 +88,6 @@ export const RoomDetail: React.FC<RoomDetailProps> = ({
                       >
                         <FontAwesomeIcon icon={faEdit} className="me-1" /> Edit
                       </button>
-                      {showModal && (
-                        <UpdateRoom
-                          onShow={showModal}
-                          roomId={_id}
-                          updateRoomList={updateRoomList}
-                          onClose={() => {
-                            setShowModal(false);
-                          }}
-                        />
-                      )}
                     </div>
                     <div className="col-12">
                       <button
@@ -134,15 +124,26 @@ export const RoomDetail: React.FC<RoomDetailProps> = ({
             </div>
           </div>
 
-          {newReservationModal && (
+          
+        </div>
+      </div>
+      {newReservationModal && (
             <NewReservation
               showNewReservationModal={newReservationModal}
               closeNewReservationModal={() => setNewReservationModal(false)}
               updateReservationList={onUpdate}
             />
           )}
-        </div>
-      </div>
+      {showModal && (
+        <UpdateRoom
+          onShow={showModal}
+          roomId={_id}
+          updateRoomList={updateRoomList}
+          onClose={() => {
+            setShowModal(false);
+          }}
+        />
+      )}
     </div>
   );
 };

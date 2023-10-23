@@ -38,7 +38,7 @@ export const HotelDetail: React.FC<HotelDetailProps> = ({
 
   return (
     <div className="col-lg-12 mb-4">
-      <div className="card shadow d-flex flex-row">
+      <div className="card custom-card border border-0 d-flex flex-row">
         <div className="col-md-4 image-container">
           <img
             src={hotelImgUrl}
@@ -96,23 +96,14 @@ export const HotelDetail: React.FC<HotelDetailProps> = ({
                       >
                         <FontAwesomeIcon icon={faEdit} className="me-1" /> Edit
                       </button>
-                      {showModal && (
-                        <UpdateHotel
-                          onShow={showModal}
-                          hotelId={_id}
-                          updateHotelList={updateHotelList}
-                          onClose={() => {
-                            setShowModal(false);
-                          }}
-                        />
-                      )}
                     </div>
                     <div className="col-12">
                       <button
                         className="btn btn-danger w-100 mt-2"
                         onClick={onDelete}
                       >
-                        <FontAwesomeIcon icon={faTrash} className="me-1" />Delete
+                        <FontAwesomeIcon icon={faTrash} className="me-1" />
+                        Delete
                       </button>
                     </div>
                   </div>
@@ -141,6 +132,16 @@ export const HotelDetail: React.FC<HotelDetailProps> = ({
           </div>
         </div>
       </div>
+      {showModal && (
+        <UpdateHotel
+          onShow={showModal}
+          hotelId={_id}
+          updateHotelList={updateHotelList}
+          onClose={() => {
+            setShowModal(false);
+          }}
+        />
+      )}
     </div>
   );
 };

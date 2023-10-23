@@ -108,7 +108,6 @@ const MainForm: React.FC<MainFormProps> = ({ formData, onSearch }) => {
     const storedFormData = localStorage.getItem("formData");
     if (storedFormData) {
       const parsedData = JSON.parse(storedFormData);
-      // Convert numGuests to number when loading data from localStorage
       const checkInDate = new Date(parsedData.checkInDate);
       const checkOutDate = new Date(parsedData.checkOutDate);
 
@@ -116,6 +115,7 @@ const MainForm: React.FC<MainFormProps> = ({ formData, onSearch }) => {
         ...parsedData,
         checkInDate, // make sure checkInDate is a Date object
         checkOutDate, // make sure checkOutDate is a Date object
+        // Convert numGuests to number when loading data from localStorage
         numGuests: parseInt(parsedData.numGuests, 10), 
       });
     }

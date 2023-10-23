@@ -18,6 +18,7 @@ interface EmailBody {
     hotelNameReservation: string;
     roomNumberReservation: string;
     reservationActive: boolean;
+    totalPriceReservation: number;
     _id?: string;
   };
   additionalGuestNames: string[];

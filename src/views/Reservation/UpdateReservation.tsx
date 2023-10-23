@@ -6,6 +6,7 @@ import {
   getReservationByIdController,
   updateReservationController,
 } from "../../controllers/ReservationController";
+import "../../assets/styles/main.css";
 
 interface UpdateReservationProps {
   showUpdateReservationModal: boolean;
@@ -40,6 +41,7 @@ const UpdateReservation: React.FC<UpdateReservationProps> = ({
     roomNumberReservation: "",
     reservationActive: true,
     guests: [],
+    totalPriceReservation: 1,
   });
 
   const handleInputChange = (
@@ -172,7 +174,7 @@ const UpdateReservation: React.FC<UpdateReservationProps> = ({
                       <label className="form-label">Hotel's Name:</label>
                       <input
                         type="text"
-                        className="form-control"
+                        className="form-control bg-custom"
                         value={reservationData.hotelNameReservation}
                         required
                         readOnly
@@ -182,7 +184,7 @@ const UpdateReservation: React.FC<UpdateReservationProps> = ({
                       <label className="form-label"> City: </label>
                       <input
                         type="text"
-                        className="form-control"
+                        className="form-control bg-custom"
                         value={reservationData.lodgingCity}
                         required
                         readOnly
@@ -192,10 +194,10 @@ const UpdateReservation: React.FC<UpdateReservationProps> = ({
 
                   <div className="row">
                     <div className="col-6">
-                      <label className="form-label">Room:</label>
+                      <label className="form-label ">Room:</label>
                       <input
                         type="text"
-                        className="form-control"
+                        className="form-control bg-custom"
                         value={reservationData.roomNumberReservation}
                         required
                         readOnly
@@ -353,7 +355,7 @@ const UpdateReservation: React.FC<UpdateReservationProps> = ({
                         required
                       />
                     </div>
-                  </div>  
+                  </div>
                   <div className="row">
                     <div className="col-6">
                       <label htmlFor="emergencyContactName" className="py-2">
@@ -385,7 +387,7 @@ const UpdateReservation: React.FC<UpdateReservationProps> = ({
                     </div>
                   </div>
 
-                  <div className="row">
+                  <div className="row mb-3">
                     <div className="col-6">
                       <label htmlFor="nameGuest" className="py-2">
                         Add Guests
@@ -400,6 +402,18 @@ const UpdateReservation: React.FC<UpdateReservationProps> = ({
                         <option value="3">3</option>
                         <option value="4">4</option>
                       </select>
+                    </div>
+                    <div className="col-6">
+                      <label htmlFor="totalPriceReservation" className="py-2">
+                        Total Price Reservation
+                      </label>
+                      <input
+                        type="text"
+                        id="totalPriceReservation"
+                        className="form-control"
+                        value={reservationData.totalPriceReservation}
+                        onChange={handleInputChange}
+                      />
                     </div>
                   </div>
 

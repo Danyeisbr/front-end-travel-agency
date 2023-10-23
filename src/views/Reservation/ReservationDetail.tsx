@@ -28,6 +28,7 @@ export const ReservationDetail: React.FC<ReservationDetailProps> = ({
   hotelNameReservation,
   roomNumberReservation,
   reservationActive,
+  totalPriceReservation,
   guests,
   onDelete,
   onUpdate,
@@ -38,7 +39,7 @@ export const ReservationDetail: React.FC<ReservationDetailProps> = ({
 
   return (
     <div className="col-lg-12 mb-4">
-      <div className="card shadow d-flex flex-row">
+      <div className="card custom-card border border-0 d-flex flex-row">
         <div className="card-body col-md-8">
           <h5 className="card-title">
             Reservation Number: {reservationNumber}
@@ -85,6 +86,7 @@ export const ReservationDetail: React.FC<ReservationDetailProps> = ({
                       )}
                     </p>
                   )}
+                  <p> Total Price Reservation: {totalPriceReservation} </p>
                 </div>
               </div>
             </div>
@@ -112,16 +114,6 @@ export const ReservationDetail: React.FC<ReservationDetailProps> = ({
                     <FontAwesomeIcon icon={faEdit} className="me-1" />
                     Edit
                   </button>
-                  {showModalUpdateReservation && (
-                    <UpdateReservation
-                      showUpdateReservationModal={showModalUpdateReservation}
-                      reservationId={_id}
-                      updateReservationList={updateReservationList}
-                      closeUpdateReservationModal={() =>
-                        setShowModalUpdateReservation(false)
-                      }
-                    />
-                  )}
                 </div>
               </div>
               <div className="row">
@@ -136,6 +128,16 @@ export const ReservationDetail: React.FC<ReservationDetailProps> = ({
           </div>
         </div>
       </div>
+      {showModalUpdateReservation && (
+        <UpdateReservation
+          showUpdateReservationModal={showModalUpdateReservation}
+          reservationId={_id}
+          updateReservationList={updateReservationList}
+          closeUpdateReservationModal={() =>
+            setShowModalUpdateReservation(false)
+          }
+        />
+      )}
     </div>
   );
 };

@@ -17,4 +17,5 @@ export interface Reservation {
   roomNumberReservation: string;
   reservationActive: boolean;
   guests: string[];
+  totalPriceReservation: number;
 }

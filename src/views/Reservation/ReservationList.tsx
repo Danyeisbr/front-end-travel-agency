@@ -13,6 +13,7 @@ const ReservationList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [newReservationModal, setNewReservationModal] = useState(true);
+  const [localReservation, setLocalReservation] = useState<Reservation[]>([]);
 
   const updateReservationList = async () => {
     const fetchedReservations = await getReservationsController();
@@ -64,6 +65,15 @@ const ReservationList: React.FC = () => {
       }
     };
 
+    // ! This function is not working yet! This function is for those who have not signed in already to see their reservations created.
+
+    const storedReservation = localStorage.getItem("newReservation");
+    // Convert the JSON string to an object array
+    if (storedReservation) {
+      const parsedReservations = JSON.parse(storedReservation);
+      setLocalReservation(parsedReservations);
+    }
+
     loadReservations();
   }, []);
 
@@ -107,6 +117,27 @@ const ReservationList: React.FC = () => {
                   {" "}
                   Your reservations, so far...
                 </h1>
+
+                {<>{console.log(localReservation)}</>}
+
+                {/* {localReservation.length > 0 ? (
+                  localReservation.map((reservation: any) => (
+                    <ReservationDetail
+                      key={reservation._id}
+                      {...reservation}
+                      onDelete={() =>
+                        reservation._id &&
+                        handleDeleteReservation(reservation._id)
+                      }
+                      onUpdate={() =>
+                        reservation._id &&
+                        handleUpdateReservation(reservation._id)
+                      }
+                    />
+                  ))
+                ) : (
+                  <p>There are no records of reservations made.</p>
+                )} */}
               </div>
             </>
           )}

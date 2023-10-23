@@ -24,6 +24,10 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.bg-custom {
+  background-color: #B4B4B3;
+}
+
 .loading-container {
   position: relative;
 }
@@ -38,4 +42,36 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.custom-card {
+  transition: all 0.3s ease;
+}
+
+.custom-card {
+  transform: scale(1);
+  background-color: #ffffff; /* Original background color */
+  color: #000000; /* Original color font */
+}
+
+.custom-card:hover {
+  transform: scale(1.04); /* Aumentar tamaño al pasar el mouse */
+  background-color: #B4B4B3; /* Cambiar color de fondo al pasar el mouse */
+  /*color: #ffffff;  Cambiar color de texto al pasar el mouse */
+  box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* Efecto fade in */
+.custom-card {
+  opacity: 0; /* Inicialmente, la tarjeta está invisible */
+  animation: fadeIn 1s ease-in-out forwards; /* Animación de fade in */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

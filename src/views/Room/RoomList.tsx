@@ -108,7 +108,7 @@ const RoomList: React.FC = () => {
                     Bookmarked
                   </button>
                   <button className="btn btn-info d-none d-sm-block w-100">
-                    See Bookmarked Hotels
+                    See Bookmarked Rooms
                   </button>
                 </>
               ) : (

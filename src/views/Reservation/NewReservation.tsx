@@ -5,6 +5,7 @@ import { Reservation } from "../../models/ReservationModel";
 import { createReservationController } from "../../controllers/ReservationController";
 import { sendEmailController } from "../../controllers/EmailResend";
 import ModalSuccess from "./ModalSuccess";
+import "../../assets/styles/main.css";
 
 interface NewReservationProps {
   showNewReservationModal: boolean;
@@ -47,6 +48,7 @@ const NewReservation: React.FC<NewReservationProps> = ({
     roomNumberReservation: "",
     reservationActive: true,
     guests: [],
+    totalPriceReservation: 1,
   });
 
   const [formData, setFormData] = useState({
@@ -105,6 +107,7 @@ const NewReservation: React.FC<NewReservationProps> = ({
         console.log("Email sent...: " + sendEmail);
         setShowSuccessModal(true);
       }
+      localStorage.setItem('newReservation', JSON.stringify(newReservation));
       //console.log("New Reservation created:", newReservation);
       updateReservationList();
     } catch (error) {
@@ -140,6 +143,9 @@ const NewReservation: React.FC<NewReservationProps> = ({
     });
   };
 
+  const [roomBasePriceValue, setRoomBasePrice] = useState(0);
+  const [roomTaxValue, setRoomTax] = useState(0);
+
   useEffect(() => {
     const storedFormData = localStorage.getItem("formData");
     const hotelData = localStorage.getItem("selectedHotel");
@@ -151,6 +157,11 @@ const NewReservation: React.FC<NewReservationProps> = ({
       const parsedRoomData = JSON.parse(roomData);
       const parsedFormData = JSON.parse(storedFormData);
 
+      const roomBasePrice = parseInt(parsedRoomData?.roomBasePrice, 10) || 0;
+      const roomTax = parseInt(parsedRoomData?.roomTax, 10) || 0;
+      setRoomBasePrice(roomBasePrice);
+      setRoomTax(roomTax);
+
       // Set default values to state if empty
       setReservationData((prevData) => ({
         ...prevData,
@@ -159,6 +170,7 @@ const NewReservation: React.FC<NewReservationProps> = ({
         checkOut: new Date(parsedFormData.checkOutDate),
         hotelNameReservation: parsedHotelData?.hotelName || "",
         roomNumberReservation: parsedRoomData?.roomNumber || "",
+        totalPriceReservation: roomBasePrice + roomTax || 0,
       }));
 
       const selectedValue = parseInt(parsedFormData.numGuests, 10);
@@ -203,7 +215,7 @@ const NewReservation: React.FC<NewReservationProps> = ({
                           <input
                             type="text"
                             id="hotelNameReservation"
-                            className="form-control"
+                            className="form-control bg-custom"
                             value={reservationData.hotelNameReservation}
                             required
                             readOnly
@@ -216,7 +228,7 @@ const NewReservation: React.FC<NewReservationProps> = ({
                           <input
                             type="text"
                             id="roomNumberReservation"
-                            className="form-control"
+                            className="form-control bg-custom"
                             value={reservationData.roomNumberReservation}
                             required
                             readOnly
@@ -230,7 +242,7 @@ const NewReservation: React.FC<NewReservationProps> = ({
                           <input
                             type="text"
                             id="lodgingCity"
-                            className="form-control"
+                            className="form-control bg-custom"
                             value={reservationData.lodgingCity}
                             required
                             readOnly
@@ -456,6 +468,49 @@ const NewReservation: React.FC<NewReservationProps> = ({
                             />
                           </div>
                         ))}
+                      </div>
+
+                      <div className="row d-flex mb-3">
+                        <div className="col-6 mb-3">
+                          <label
+                            htmlFor="roomBasePrice"
+                            className="py-2 d-block text-end"
+                          >
+                            Room Base Price:
+                          </label>
+                          <label
+                            htmlFor="roomTax"
+                            className="py-2 d-block text-end"
+                          >
+                            Room Tax:
+                          </label>
+                          <label
+                            htmlFor="totalPriceReservation"
+                            className="py-2 d-block text-end"
+                          >
+                            Total Price Reservation:
+                          </label>
+                        </div>
+                        <div className="col-6">
+                          <input
+                            type="text"
+                            className="form-control d-block border border-0 m-1"
+                            value={`$ ${roomBasePriceValue}`}
+                            readOnly
+                          />
+                          <input
+                            type="text"
+                            className="form-control d-block border border-0 m-1"
+                            value={`$ ${roomTaxValue}`}
+                            readOnly
+                          />
+                          <input
+                            type="text"
+                            className="form-control bg-custom d-block border border-0 m-1"
+                            value={reservationData.totalPriceReservation}
+                            readOnly
+                          />
+                        </div>
                       </div>
 
                       <div className="row">
